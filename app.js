@@ -423,7 +423,7 @@ sekmeler.addEventListener('keydown', e => {
 });
 
 /* ---- SSS ---- */
-$('#sssListe').innerHTML = SSS.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${q}</summary><p>${a}</p></details>`).join('');
+$('#sssListe').innerHTML = SSS.map(([q, a], i) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('');
 
 /* ---- başvuru formu (demo: hiçbir yere gönderilmez) ---- */
 $$('[data-tur]').forEach(a => a.addEventListener('click', () => { const r = $(`input[name=tur][value=${a.dataset.tur}]`); if (r) r.checked = true; }));

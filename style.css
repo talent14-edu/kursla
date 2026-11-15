@@ -196,8 +196,8 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 .uclu{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1220px;margin:0 auto}
 .bilesen{position:relative;background:#fff;border-radius:var(--r-xl);padding:20px 26px 30px;box-shadow:var(--g-s);transition:transform .35s var(--ease),box-shadow .35s}
 .bilesen:hover{transform:translateY(-6px);box-shadow:var(--g-m)}
-.bilesen-gorsel{aspect-ratio:4/3;display:grid;place-items:center;border-radius:var(--r-l);background:radial-gradient(circle at 50% 60%,var(--yesil-50),#fff 70%);margin-bottom:18px}
-.bilesen-gorsel img{width:78%;height:92%;object-fit:contain;transition:transform .6s var(--ease)}
+.bilesen-gorsel{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:var(--r-l);background:radial-gradient(circle at 50% 60%,var(--yesil-50),#fff 70%);margin-bottom:18px}
+.bilesen-gorsel img{height:88%;width:auto;max-width:86%;object-fit:contain;transition:transform .6s var(--ease)}
 .bilesen:hover .bilesen-gorsel img{transform:scale(1.06) rotate(-2deg)}
 .bilesen .no{position:absolute;top:28px;left:34px;font:800 13px var(--baslik);color:var(--altin-yazi);background:var(--altin-50);padding:5px 10px;border-radius:999px}
 .bilesen h3{font-size:24px;color:var(--yesil-m);margin-bottom:8px}
@@ -391,6 +391,43 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 .popup-kutu h3{font-size:24px;color:var(--yesil-m);margin-bottom:8px}
 .popup-kutu p{color:var(--govde);margin-bottom:18px}
 
+
+/* ---------- masaüstü: her bölüm tek ekran ----------
+   Bölüm = bir ekran yüksekliği, içerik dikeyde ortalı; ölçüler ekran yüksekliğine (svh) göre küçülür,
+   böylece 640 px yüksek ekranda da bölüm kaydırmadan görünür. Kaydırma bölüm başına yumuşakça oturur. */
+@media (min-width:1101px){
+  html{scroll-snap-type:y proximity;scroll-padding-top:0}
+  .hero,.bolum,.basvuru{scroll-snap-align:start}
+  .bolum,.basvuru{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:clamp(76px,11svh,96px);padding-bottom:clamp(20px,4svh,48px)}
+  .bolum>*,.basvuru>*{width:100%}
+  .bolum-ust{margin-bottom:clamp(18px,4.5svh,52px)}
+  .bolum h2,.basvuru h2{font-size:clamp(30px,min(4vw,6.6svh),54px)}
+  .bolum-ust .giris-metin{margin-top:clamp(6px,1.4svh,14px)}
+  .bilesen{padding:clamp(12px,2svh,20px) 24px clamp(16px,3svh,30px)}
+  .bilesen-gorsel{aspect-ratio:auto;height:clamp(110px,24svh,250px);margin-bottom:clamp(10px,2svh,18px)}
+  .donusum li{padding:clamp(16px,3svh,26px) 22px}
+  .patika{height:clamp(320px,44svh,400px)}
+  .panel{padding:clamp(18px,3.4svh,44px) clamp(22px,3.5vw,44px)}
+  .panel-gorsel{width:clamp(64px,12svh,120px);height:clamp(64px,12svh,120px)}
+  .sekmeler{margin-bottom:clamp(14px,3svh,30px)}
+  .yol-kart img{max-height:clamp(150px,36svh,320px)}
+  .kaynaklar{gap:clamp(8px,1.6svh,14px)}
+  .kaynak img{width:clamp(44px,8svh,64px);height:clamp(44px,8svh,64px)}
+  .harita{padding:clamp(12px,2.4svh,20px) 24px}
+  .radar{max-height:clamp(220px,42svh,330px)}
+  .uy-liste{gap:clamp(10px,2svh,18px);margin:clamp(14px,3svh,28px) 0}
+  .foto img{aspect-ratio:auto;height:clamp(280px,62svh,560px)}
+  .sss{gap:clamp(6px,1.2svh,12px)}
+  .sss summary{padding:clamp(12px,2.2svh,20px) 24px}
+  .basvuru-ic{gap:clamp(24px,4vw,80px)}
+  .basvuru-logo{height:clamp(40px,7svh,64px);margin-bottom:clamp(10px,2svh,22px)}
+  .form{padding:clamp(16px,2.6svh,34px) clamp(20px,2.4vw,34px)}
+  .tur{gap:6px;margin-bottom:clamp(10px,1.8svh,18px)}
+  .tur label{padding:clamp(7px,1.2svh,11px) 14px}
+  .alanlar{gap:clamp(8px,1.4svh,12px);margin-bottom:clamp(10px,1.8svh,18px)}
+  .alanlar input,.alanlar textarea{padding:clamp(8px,1.4svh,12px) 14px}
+  .alanlar textarea{height:clamp(44px,8svh,84px)}
+}
 /* ---------- duyarlı ---------- */
 @media (max-width:1180px){
   .links a{padding:8px 9px;font-size:14px}
