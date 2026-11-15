@@ -363,15 +363,23 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 .tur legend{font:700 15px var(--baslik);color:var(--yesil-m);margin-bottom:10px}
 .tur label{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:14px;box-shadow:inset 0 0 0 1.5px var(--cizgi);cursor:pointer;font-weight:600;font-size:14.5px;transition:all .25s}
 .tur input{accent-color:var(--yesil);width:18px;height:18px}
+.tur{grid-template-columns:repeat(3,1fr)}
+.tur legend{grid-column:1/-1}
+.tur label{justify-content:center;text-align:center;font-size:14px}
+@media (max-width:560px){.tur{grid-template-columns:1fr}.tur label{justify-content:flex-start;text-align:left}}
 .tur label:has(input:checked){box-shadow:inset 0 0 0 2px var(--yesil);background:var(--yesil-50)}
 .alanlar{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
 .alanlar label{display:grid;gap:5px;font-size:13px;font-weight:700;color:var(--govde)}
 .alanlar .genis{grid-column:1/-1}
-.alanlar input,.alanlar textarea{font:500 15px var(--metin);padding:12px 14px;border-radius:12px;border:1.5px solid var(--cizgi);background:#fff;color:var(--murekkep);resize:vertical}
-.alanlar input:focus,.alanlar textarea:focus{outline:none;border-color:var(--yesil);box-shadow:0 0 0 4px #10574a1f}
+.alanlar input,.alanlar textarea,.alanlar select{font:500 15px var(--metin);padding:12px 14px;border-radius:12px;border:1.5px solid var(--cizgi);background:#fff;color:var(--murekkep);resize:vertical}
+.alanlar input:focus,.alanlar textarea:focus,.alanlar select:focus{outline:none;border-color:var(--yesil);box-shadow:0 0 0 4px #10574a1f}
 .alanlar input.hata{border-color:#c0392b}
 .form .btn{width:100%;justify-content:center}
-.kucuk{font-size:12.5px;color:var(--soluk);margin-top:10px;text-align:center}
+.alanlar label em{font-style:normal;font-weight:500;color:var(--soluk)}
+.bal{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.aydinlatma{font-size:12.5px;color:var(--govde);margin:0 0 12px}
+.aydinlatma a{color:var(--yesil);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.form-hata{margin:0 0 12px;padding:10px 12px;border-radius:12px;background:#fdecea;color:#9b2c1f;font-size:13.5px;font-weight:600}
 .tamam{margin-top:14px;padding:14px;border-radius:14px;background:var(--yesil-50);color:var(--yesil-k);font-weight:700;text-align:center}
 
 /* altbilgi */
@@ -427,8 +435,8 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
   .tur{gap:6px;margin-bottom:clamp(10px,1.8svh,18px)}
   .tur label{padding:clamp(7px,1.2svh,11px) 14px}
   .alanlar{gap:clamp(8px,1.4svh,12px);margin-bottom:clamp(10px,1.8svh,18px)}
-  .alanlar input,.alanlar textarea{padding:clamp(8px,1.4svh,12px) 14px}
-  .alanlar textarea{height:clamp(44px,8svh,84px)}
+  .alanlar input,.alanlar textarea,.alanlar select{padding:clamp(8px,1.4svh,12px) 14px}
+  .alanlar textarea{height:clamp(40px,6svh,84px)}
 }
 /* ---------- duyarlı ---------- */
 @media (max-width:1180px){

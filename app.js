@@ -425,19 +425,43 @@ sekmeler.addEventListener('keydown', e => {
 /* ---- SSS ---- */
 $('#sssListe').innerHTML = SSS.map(([q, a], i) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('');
 
-/* ---- başvuru formu (demo: hiçbir yere gönderilmez) ---- */
+/* ---- başvuru formu ----
+   Apps Script -> Google E-Tablo "KURSLA.ai Başvuruları" (egitim Drive) + e-posta mada@talent14.com (cc egitim@talent14.com).
+   Script: kursla/form/Kod.gs. Web uygulaması yayınlanınca /exec adresini FORM_ENDPOINT'e yaz.
+   text/plain gövde: CORS ön isteği çıkmaz, Apps Script'e doğrudan düşer. */
+const FORM_ENDPOINT = '';
 $$('[data-tur]').forEach(a => a.addEventListener('click', () => { const r = $(`input[name=tur][value=${a.dataset.tur}]`); if (r) r.checked = true; }));
-const form = $('#form');
-form.addEventListener('submit', e => {
+const form = $('#form'), gonder = $('button[type=submit]', form), fhata = $('.form-hata', form);
+const url = new URLSearchParams(location.search);
+form.kaynak.value = url.get('utm_source') || document.referrer.replace(/^https?:\/\//, '').split('/')[0] || 'doğrudan';
+form.kampanya.value = url.get('utm_campaign') || '';
+const telGecerli = v => v.replace(/\D/g, '').replace(/^90/, '').replace(/^0/, '').length === 10;
+form.addEventListener('submit', async e => {
   e.preventDefault();
+  fhata.hidden = true;
   let ok = true;
   $$('input[required]', form).forEach(inp => {
-    const bad = !inp.value.trim() || (inp.type === 'email' && !/^\S+@\S+\.\S+$/.test(inp.value));
+    const v = inp.value.trim();
+    const bad = !v || (inp.type === 'email' && !/^\S+@\S+\.\S+$/.test(v)) || (inp.type === 'tel' && !telGecerli(v));
     inp.classList.toggle('hata', bad); if (bad) ok = false;
   });
-  if (!ok) { $('input.hata', form).focus(); return; }
-  $('#tamam').hidden = false;
-  form.querySelector('button[type=submit]').disabled = true;
+  if (!ok) {
+    fhata.textContent = 'Lütfen işaretli alanları kontrol edin. Telefon 10 haneli olmalı (05XX XXX XX XX).';
+    fhata.hidden = false; $('input.hata', form).focus(); return;
+  }
+  const veri = Object.fromEntries(new FormData(form));
+  gonder.disabled = true; gonder.firstChild.textContent = 'Gönderiliyor… ';
+  try {
+    // Adres girilmeden başvuruyu kaydetmeden "alındı" deme: uyarı göster, kimse sessizce kaybolmasın.
+    if (!FORM_ENDPOINT) throw new Error('form bağlı değil');
+    const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(veri) });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.hata || 'kaydedilemedi');
+    $('#tamam').hidden = false; gonder.hidden = true; form.reset();
+  } catch (err) {
+    fhata.textContent = 'Başvuru gönderilemedi. Lütfen tekrar deneyin ya da info@kursla.ai adresine yazın.';
+    fhata.hidden = false; gonder.disabled = false; gonder.firstChild.textContent = 'Başvuruyu gönder ';
+  }
 });
 
 /* ---- aktif menü bağlantısı ---- */

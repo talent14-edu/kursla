@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20">
+<link rel="stylesheet" href="style.css?v=22">
 <!-- Kursla v1 (15.11.2026). İçerik canlı kursla.ai'den; düzen AI-LA landing'inden; hero fikri Okumino'nun
      "okuma odası"ndan: tek bir Codex sahnesi (kesitli kurs binası), katlar tıklanabilir, AI-LA çekirdeği canlı. -->
 </head>
@@ -248,21 +248,26 @@
     </div>
     <form class="form" id="form" novalidate>
       <fieldset class="tur">
-        <legend>Başvuru türünü seçin</legend>
-        <label><input type="radio" name="tur" value="donusum" checked><span>Mevcut merkezimi dönüştürmek istiyorum</span></label>
-        <label><input type="radio" name="tur" value="yeni"><span>Yeni kuracağım merkeze kurmak istiyorum</span></label>
-        <label><input type="radio" name="tur" value="kurum"><span>Kurumsal / belediye iş birliği</span></label>
+        <legend>Başvuru türü</legend>
+        <label><input type="radio" name="tur" value="donusum" checked><span>Mevcut merkezim</span></label>
+        <label><input type="radio" name="tur" value="yeni"><span>Yeni merkez</span></label>
+        <label><input type="radio" name="tur" value="kurum"><span>Kurumsal / belediye</span></label>
       </fieldset>
       <div class="alanlar">
-        <label><span>Ad Soyad</span><input name="ad" type="text" autocomplete="name" required></label>
-        <label><span>Telefon</span><input name="tel" type="tel" autocomplete="tel" placeholder="05XX..." required></label>
-        <label><span>E-posta adresi</span><input name="eposta" type="email" autocomplete="email" required></label>
-        <label><span>Kurum / Kurs merkezi adı</span><input name="kurum" type="text" autocomplete="organization"></label>
-        <label class="genis"><span>Şehir, öğrenci sayısı ve hedefleriniz</span><textarea name="not" rows="3"></textarea></label>
+        <label><span>Ad soyad</span><input name="ad" type="text" autocomplete="name" required></label>
+        <label><span>Telefon</span><input name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="05XX XXX XX XX" required></label>
+        <label><span>E-posta</span><input name="eposta" type="email" autocomplete="email" required></label>
+        <label><span>Kurum / kurs merkezi adı</span><input name="kurum" type="text" autocomplete="organization"></label>
+        <label><span>Şehir / ilçe</span><input name="sehir" type="text" autocomplete="address-level2" placeholder="Ankara / Çankaya"></label>
+        <label><span>Öğrenci sayısı</span><select name="sayi"><option value="">Seçin</option><option>50'den az</option><option>50-150</option><option>150-300</option><option>300'den fazla</option><option>Henüz açılmadı</option></select></label>
+        <label class="genis"><span>Notunuz <em>(isteğe bağlı)</em></span><textarea name="not" rows="2"></textarea></label>
       </div>
+      <input type="hidden" name="kaynak"><input type="hidden" name="kampanya">
+      <label class="bal" aria-hidden="true">Web<input name="web_adresi_2" tabindex="-1" autocomplete="off"></label>
+      <p class="aydinlatma">Bilgileriniz yalnızca başvurunuzu yanıtlamak için işlenir. Ayrıntılar: <a href="kvkk/#basvuru-formu" target="_blank" rel="noopener">Başvuru formu aydınlatma metni</a>.</p>
+      <p class="form-hata" role="alert" hidden></p>
       <button class="btn btn-altin btn-buyuk" type="submit">Başvuruyu gönder <span aria-hidden="true">→</span></button>
-      <p class="kucuk">Bilgileriniz yalnızca başvuru değerlendirmesi için kullanılır.</p>
-      <p class="tamam" id="tamam" role="status" hidden>Başvurunuz alındı. Ekibimiz 24 saat içinde sizinle iletişime geçecek.</p>
+      <p class="tamam" id="tamam" role="status" hidden>Teşekkürler, başvurunuz alındı. Ekibimiz en kısa sürede sizinle iletişime geçecek.</p>
     </form>
   </div>
 </section>
@@ -280,11 +285,11 @@
   </div>
   <div class="alt-son">
     <span>© 2026 KURSLA.ai — Tüm hakları saklıdır.</span>
-    <span class="alt-yasal"><a href="#">Gizlilik Politikası</a><a href="#">KVKK Aydınlatma Metni</a><a href="#">Kullanım Koşulları</a></span>
+    <span class="alt-yasal"><a href="kvkk/">KVKK</a><a href="kvkk/#basvuru-formu">Başvuru formu aydınlatma metni</a><a href="https://bilisimschool.com/kvkk/cerez_ve_gizlilik_politikasi.pdf" target="_blank" rel="noopener">Çerez ve Gizlilik Politikası</a></span>
     <span>Bir <a href="https://ai-la.ai">AI-LA</a> ekosistem ürünüdür.</span>
   </div>
 </footer>
 
-<script src="app.js?v=17"></script>
+<script src="app.js?v=22"></script>
 </body>
 </html>

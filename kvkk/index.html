@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KVKK · KURSLA.ai</title>
+<meta name="description" content="KURSLA.ai kişisel verilerin korunması: politika ve aydınlatma metinleri.">
+<link rel="icon" href="../img/ikon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+<!-- Düzen: talent14.com/kvkk + Okumino KVKK sayfası (2026-11-16). Belgeler Bilişim School'un yayımlı KVKK PDF'leri. Üreten: kursla/gen/kvkk_sayfa.py -->
+<style>
+:root{--krem:#fbf9f3;--krem2:#f4f1e7;--yesil:#10574a;--yesil-k:#0b4038;--yesil-d:#072a23;--yesil-m:#041b17;--yesil50:#e9f3ef;--altin:#f5b62b;--altin-y:#ffc94f;--altin-yazi:#8a5d00;
+  --govde:#55635e;--cizgi:#e6e4da;--baslik:'Outfit',sans-serif;--metin:'Plus Jakarta Sans',sans-serif;--pad:clamp(16px,5vw,64px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--krem);color:var(--govde);font:500 16px/1.6 var(--metin);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px var(--pad);background:#fbf9f3ee;backdrop-filter:blur(10px);box-shadow:0 3px 12px #10574a14}
+.bar .marka img{display:block;height:40px;width:auto}
+.bar .geri{font:700 15px/1 var(--metin);color:#fff;text-decoration:none;padding:11px 18px;border-radius:999px;background:var(--yesil)}
+.bar .geri:hover{background:var(--yesil-k)}
+.bar .geri .kisa{display:none}
+.hero{background:radial-gradient(900px 420px at 85% 0%,#17806b66,transparent 60%),linear-gradient(160deg,var(--yesil-d) 0%,var(--yesil-m) 75%);color:#fff}
+.hero .ic{max-width:1120px;margin:0 auto;padding:clamp(44px,8vw,84px) var(--pad) clamp(48px,8vw,80px)}
+.bc{font-size:13px;color:#a9c1b8}.bc a{text-decoration:none}.bc a:hover{color:#fff}.bc span{color:var(--altin-y)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-top:34px;font:700 12px/1 var(--metin);letter-spacing:.18em;text-transform:uppercase;color:var(--altin-y)}
+.eyebrow svg{width:13px;height:13px}
+h1{margin-top:16px;max-width:760px;font:800 clamp(34px,5.4vw,58px)/1.08 var(--baslik);letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--altin-y)}
+.lead{margin-top:20px;max-width:640px;color:#cfe5dd;font-size:17px}
+main{max-width:1120px;margin:0 auto;padding:clamp(40px,7vw,72px) var(--pad)}
+.kartlar{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.kart{display:flex;flex-direction:column;background:#fff;border-radius:24px;padding:26px 26px 28px;box-shadow:0 3px 12px #10574a14}
+.kart-ust{display:flex;gap:16px;align-items:flex-start}
+.ikon{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--yesil50);color:var(--yesil)}
+.ikon svg{width:24px;height:24px}
+.kart h2{font:700 19px/1.3 var(--baslik);color:var(--yesil-m);padding-top:6px}
+.kart p{margin-top:16px;color:var(--govde);font-size:15px;flex:1}
+.kart a.btn{margin-top:22px;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 16px;border-radius:999px;background:var(--yesil);color:#fff;text-decoration:none;font:700 14px/1 var(--metin);transition:transform .2s,background .2s}
+.kart a.btn svg{width:16px;height:16px}
+.kart a.btn:hover{background:var(--yesil-k);transform:translateY(-2px)}
+.iletisim{background:var(--krem2)}
+.iletisim p{max-width:640px;margin:0 auto;padding:34px var(--pad);text-align:center}
+.iletisim a{color:var(--yesil);font-weight:700;text-decoration:none;white-space:nowrap}.iletisim a:hover{text-decoration:underline}
+footer{background:var(--yesil-m);color:#a9c1b8;font-size:13px}
+footer a{color:#fff;text-underline-offset:3px}footer a:hover{color:var(--altin-y)}
+.metin{margin-top:clamp(40px,6vw,64px);background:#fff;border-radius:24px;padding:clamp(24px,4vw,48px);scroll-margin-top:90px;box-shadow:0 3px 12px #10574a14}
+.eyebrow.koyu{margin-top:0;color:var(--altin-yazi)}
+.m-baslik{margin-top:10px;font:800 clamp(26px,3.4vw,34px)/1.15 var(--baslik);color:var(--yesil-m)}
+.m-not{margin-top:8px;font-size:13px}
+.metin h3{margin-top:26px;font:700 19px/1.3 var(--baslik);color:var(--yesil-m)}
+.metin p,.metin li{margin-top:8px;color:#3d4a45;font-size:15.5px}
+.metin ul{padding-left:20px}
+.metin a{color:var(--yesil);font-weight:700}
+footer .ic{max-width:1120px;margin:0 auto;padding:22px var(--pad);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:900px){.kartlar{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.kartlar{grid-template-columns:1fr}.bar .geri .uzun{display:none}.bar .geri .kisa{display:inline}.bar .marka img{height:34px}footer .ic{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="bar"><a class="marka" href="../"><img src="../img/kursla_logo.webp" alt="KURSLA.ai" width="616" height="152"></a>
+  <a class="geri" href="../"><span class="uzun">← Ana sayfaya dön</span><span class="kisa">← Geri</span></a></header>
+<section class="hero"><div class="ic">
+  <p class="bc"><a href="../">Ana Sayfa</a> &nbsp;/&nbsp; <span>KVKK</span></p>
+  <p class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/></svg>Gizlilik &amp; Güvenlik</p>
+  <h1>Kişisel Verilerin <em>Korunması</em> <em>(KVKK)</em></h1>
+  <p class="lead">Kişisel verilerinizin güvenliği bizim için önceliktir. Aşağıdaki politika ve aydınlatma metinlerimizi inceleyebilir, PDF olarak görüntüleyebilirsiniz.</p>
+</div></section>
+<main><div class="kartlar">
+      <article class="kart"><div class="kart-ust"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h2>Çerez ve Gizlilik Politikası</h2></div>
+        <p>Web sitemizde kullanılan çerezler ve kişisel verilerinizin nasıl korunduğuna dair politikamız.</p>
+        <a class="btn" href="https://bilisimschool.com/kvkk/cerez_ve_gizlilik_politikasi.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg>Oku / İndir</a></article>
+      <article class="kart"><div class="kart-ust"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h2>Santral Hizmetleri Aydınlatma Metni</h2></div>
+        <p>Santral hizmetleri kapsamında kişisel verilerinizin işlenmesine ilişkin aydınlatma metni.</p>
+        <a class="btn" href="https://bilisimschool.com/kvkk/santral_hizmetleri_aydinlatma_metni.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg>Oku / İndir</a></article>
+      <article class="kart"><div class="kart-ust"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h2>Öğrenci ve Veli Aydınlatma Metni</h2></div>
+        <p>Öğrenci ve veli kişisel verilerinin işlenmesi ve korunmasına dair aydınlatma metni.</p>
+        <a class="btn" href="https://bilisimschool.com/kvkk/ogrenci_ve_veli_aydınlatma_metni.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg>Oku / İndir</a></article>
+      <article class="kart"><div class="kart-ust"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h2>Kişisel Veri Saklama ve İmha Politikası</h2></div>
+        <p>Kişisel verilerin ne kadar süreyle saklandığı ve nasıl imha edildiğine dair politikamız.</p>
+        <a class="btn" href="https://bilisimschool.com/kvkk/Kişisel_Veri_Saklama_ve_İmha_Politikası.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg>Oku / İndir</a></article>
+      <article class="kart"><div class="kart-ust"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h2>İlgili Kişi Başvuru Formu ve Bilgilendirme Yazısı</h2></div>
+        <p>KVKK kapsamında haklarınızı kullanmak için başvuru formu ve bilgilendirme yazısı.</p>
+        <a class="btn" href="https://bilisimschool.com/kvkk/ilgili_kisi_basvuru_formu_ve_bilgilendirme_yazisi.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg>Oku / İndir</a></article>
+      <article class="kart"><div class="kart-ust"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h2>Mesafeli Satış Sözleşmesi</h2></div>
+        <p>Uzaktan satış işlemlerine ilişkin yasal koşulları düzenleyen sözleşme metni.</p>
+        <a class="btn" href="https://bilisimschool.com/kvkk/mesafeli_satis_sozlesmesi.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M6 11l6 6 6-6"/></svg>Oku / İndir</a></article>
+</div>
+<section class="metin" id="basvuru-formu"><p class="eyebrow koyu">Aydınlatma metni</p><h2 class="m-baslik">Başvuru formu</h2>
+  <p class="m-not">Son güncelleme: 16.11.2026 · 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında</p>
+  <h3>1. Veri sorumlusu</h3><p>Kişisel verileriniz, veri sorumlusu sıfatıyla Bilişim School Eğitim Teknolojileri A.Ş. tarafından işlenir. Adres: Mustafa Kemal Mah. Mahall Ankara D-2 Blok No:24, 06510 Çankaya/Ankara. KVKK başvuruları: <a href="mailto:kvkk@bilisimschool.com">kvkk@bilisimschool.com</a>.</p>
+  <h3>2. İşlenen veriler</h3><ul><li><b>Kimlik:</b> ad soyad</li><li><b>İletişim:</b> e-posta adresi, telefon numarası</li><li><b>Kurum:</b> kurum veya kurs merkezi adı, şehir ve ilçe, yaklaşık öğrenci sayısı, başvuru türü ve isteğe bağlı olarak yazdığınız not</li><li><b>İşlem kaydı:</b> başvurunun tarihi ve saati, başvuru numarası, sayfaya ulaştığınız bağlantının kaynak ve kampanya bilgisi</li></ul>
+  <h3>3. Amaç</h3><p>Başvurunuzun alınması ve kaydedilmesi, sizinle e-posta veya telefonla iletişime geçilmesi, merkez ve bölge analizinin yapılması, görüşme ve tekliflerin hazırlanması, başvuruların hangi kanaldan geldiğinin ölçülmesi ve hukuki yükümlülüklerin yerine getirilmesi.</p>
+  <h3>4. Hukuki sebep</h3><p>KVKK m.5/2: (c) bir sözleşmenin kurulmasıyla doğrudan ilgili olması (iş birliği öncesi görüşme ve teklif), (ç) hukuki yükümlülük, (f) temel hak ve özgürlüklerinize zarar vermemek kaydıyla meşru menfaat (başvuruların takibi ve kampanya ölçümü).</p>
+  <h3>5. Aktarım</h3><p>Verileriniz yalnızca bu amaçlarla ve gerektiği ölçüde; başvuruyu yanıtlayan KURSLA.ai ve AI-LA ekibiyle, kayıtların tutulduğu ve bildirim e-postalarının gönderildiği bulut hizmeti sağlayıcısıyla (Google Workspace: Google E-Tablolar ve Gmail) ve talep hâlinde yetkili kamu kurumlarıyla paylaşılır. Bulut hizmetinin sunucuları yurt dışında bulunabilir; bu aktarım KVKK m.9 ve Kurul kararlarına uygun olarak yapılır.</p>
+  <h3>6. Toplama yöntemi ve saklama süresi</h3><p>Veriler, bu sitedeki başvuru formunu doldurmanızla elektronik ortamda toplanır. Kanuni süreler dışında iki (2) yıl saklanır; süre dolunca ya da amaç ortadan kalkınca silinir, yok edilir veya anonim hâle getirilir.</p>
+  <h3>7. Haklarınız</h3><p>KVKK m.11 uyarınca verilerinizin işlenip işlenmediğini öğrenme, bilgi isteme, amacını ve aktarıldığı kişileri öğrenme, düzeltilmesini, silinmesini veya yok edilmesini isteme, otomatik analiz sonucuna itiraz etme ve zararın giderilmesini isteme haklarına sahipsiniz. Başvurularınızı yukarıdaki İlgili Kişi Başvuru Formu ile <a href="mailto:kvkk@bilisimschool.com">kvkk@bilisimschool.com</a> adresine ya da şirket adresine iletebilirsiniz.</p>
+</section>
+</main>
+<section class="iletisim"><p>Kişisel verilerinizle ilgili sorularınız veya başvurularınız için <a href="mailto:info@kursla.ai">info@kursla.ai</a> adresine ulaşabilirsiniz.</p></section>
+<footer><div class="ic"><span>© 2026 KURSLA.ai · Tüm hakları saklıdır.</span><span>Bir <a href="https://ai-la.ai" target="_blank" rel="noopener">AI-LA</a> ekosistem ürünüdür.</span></div></footer>
+</body>
+</html>
