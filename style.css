@@ -336,7 +336,7 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 .basvuru{position:relative;overflow:hidden;color:#fff;padding:clamp(80px,10vw,140px) var(--kenar)}
 .basvuru-zemin{position:absolute;inset:0}
 .basvuru-zemin img{width:100%;height:100%;object-fit:cover;object-position:70% center}
-.basvuru-zemin::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#041b17eb 0%,#041b17b8 42%,#041b1733 100%)}
+.basvuru-zemin::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#041b17e0 0%,#041b17b0 42%,#041b1733 100%)}
 .basvuru-ic{position:relative;display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,5vw,80px);align-items:center;max-width:1220px;margin:0 auto}
 .basvuru-logo{height:64px;width:auto;margin-bottom:22px}
 .basvuru h2{font-size:clamp(34px,4vw,54px);color:#fff;margin-bottom:14px}
