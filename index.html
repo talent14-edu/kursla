@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=11">
 <!-- Kursla v1 (15.11.2026). İçerik canlı kursla.ai'den; düzen AI-LA landing'inden; hero fikri Okumino'nun
      "okuma odası"ndan: tek bir Codex sahnesi (kesitli kurs binası), katlar tıklanabilir, AI-LA çekirdeği canlı. -->
 </head>
@@ -160,26 +160,27 @@
 
 <!-- 6. AI-LA ORKESTRASYON -->
 <section class="bolum bolum-koyu" id="ekosistem" aria-labelledby="ekoBaslik">
-  <div class="eko">
-    <div class="eko-metin">
-      <p class="ust-etiket">AI-LA ekosistemi</p>
-      <h2 id="ekoBaslik">AI-LA, çevresinde <span class="y">tüm paydaşlar</span></h2>
-      <p class="alinti">AI-LA tek bir model değil; içerik platformlarını, öğretmeni ve veliyi aynı öğrenci planı etrafında eş zamanlı yöneten bir orkestrasyon katmanıdır.</p>
-      <ul class="eko-liste">
-        <li><b>Tek içerik akışı</b><span>İçerik Platformu, Kodlama Platformu ve Hızlıokuma Platformu içerikleri öğrenciye tek plan üzerinden ulaşır.</span></li>
-        <li><b>Öğretmenin yanında</b><span>Yapay zekâ hazırlığı üstlenir; öğretmen rehberliğe ve birebir takibe odaklanır.</span></li>
-        <li><b>Şeffaf raporlama</b><span>Yönetici, öğretmen ve veli aynı gerçeği farklı sadelikte görür.</span></li>
-      </ul>
-    </div>
-    <div class="yorunge" id="yorunge" aria-label="AI-LA orkestrasyon şeması">
-      <svg class="yorunge-cizgi" viewBox="0 0 500 500" aria-hidden="true"></svg>
-      <div class="merkez"><small>ORKESTRASYON</small><b>AI-LA</b><span>Öğrenci planı</span></div>
-    </div>
+  <div class="bolum-ust">
+    <p class="ust-etiket">AI-LA ekosistemi</p>
+    <h2 id="ekoBaslik">Ekosistem, kursiyerin <span class="y">beceri haritasını</span> besler</h2>
   </div>
-  <div class="eko-alt">
-    <div class="gor" style="--d:0"><b>Eksik ve dikkat haritası</b><p>Çözülen her soru, konu eksiği mi yoksa dikkat hatası mı olduğuna göre ayrıştırılır.</p></div>
-    <div class="gor" style="--d:1"><b>Kendini güncelleyen plan</b><p>Öğrencinin performansı değiştikçe haftalık plan otomatik yeniden kurulur.</p></div>
-    <div class="gor" style="--d:2"><b>Aksiyona dönük çıktı</b><p>Öğretmene öneri, veliye sade özet, yöneticiye karar verilebilir gösterge üretir.</p></div>
+  <!-- Kaynaklar -> AI-LA -> beceri haritası. Akış çizgileri JS ile kutuların gerçek konumundan çizilir. -->
+  <div class="besle" id="besle">
+    <svg class="besle-cizgi" id="besleCizgi" aria-hidden="true"></svg>
+    <ul class="kaynaklar" id="kaynaklar" aria-label="Haritayı besleyen kaynaklar"></ul>
+    <div class="cekirdek-ai" id="cekirdekAi"><img src="img/p_teknoloji.webp" alt=""><b>AI-LA</b></div>
+    <div class="harita" id="harita">
+      <div class="harita-ust"><b>Ahmet Y. · 8-A</b><span>örnek kursiyer</span></div>
+      <div class="harita-govde">
+        <svg class="radar" id="radar" viewBox="-190 -150 380 300" role="img" aria-label="Beceri haritası"></svg>
+        <div class="alan-detay" id="alanDetay" aria-live="polite"></div>
+      </div>
+      <p class="son-olay" id="sonOlay"><span class="led"></span><span id="sonOlayMetin">Kaynaklar haritayı güncelliyor</span></p>
+    </div>
+    <div class="ciktilar">
+      <span><img src="img/r_veli.webp" alt="">Veli raporu</span>
+      <span><img src="img/r_yonetici.webp" alt="">Yönetici paneli</span>
+    </div>
   </div>
 </section>
 
@@ -295,6 +296,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=6"></script>
+<script src="app.js?v=11"></script>
 </body>
 </html>

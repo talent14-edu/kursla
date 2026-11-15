@@ -217,33 +217,147 @@ addEventListener('scroll', () => { if (!kb) { kb = true; requestAnimationFrame((
 addEventListener('resize', () => { durakYerlestir(); kaydir(); });
 durakYerlestir(); kaydir();
 
-/* ---- AI-LA orkestrasyon yörüngesi ---- */
-const IK = {
-  icerik: '<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5Z"/><path d="M13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13Z"/>',
-  kod: '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>',
-  hiz: '<path d="M4 12h9M4 7h12M4 17h6"/><path d="m16 14 4 3-4 3"/>',
-  ogretmen: '<circle cx="12" cy="7.5" r="3.5"/><path d="M5 20c1-4 3.8-6 7-6s6 2 7 6"/>',
-  veli: '<circle cx="8.5" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M3.5 19.5c.7-3.4 2.6-5.3 5-5.3s4.3 1.9 5 5.3M14 19.5c.4-2.4 1.6-3.8 3-3.8 1.6 0 2.8 1.4 3.3 3.8"/>',
-  yonetici: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 15v-3M12 15V9M16 15v-5"/>',
-};
-const DUGUM = [['icerik', 'İçerik Platformu'], ['kod', 'Kodlama Platformu'], ['hiz', 'Hızlıokuma Platformu'], ['ogretmen', 'Öğretmen'], ['veli', 'Veli'], ['yonetici', 'Yönetici']];
-const yor = $('#yorunge'), svg = $('.yorunge-cizgi');
-const R = 200, C = 250;
-let s = `<circle class="halka" cx="${C}" cy="${C}" r="${R}"/><circle class="halka" cx="${C}" cy="${C}" r="${R * .62}"/>`;
-DUGUM.forEach(([ik, ad], i) => {
-  const a = -Math.PI / 2 + i * Math.PI * 2 / DUGUM.length;
-  const x = C + R * Math.cos(a), y = C + R * Math.sin(a);
-  s += `<path class="bag" d="M${C} ${C} L${x.toFixed(1)} ${y.toFixed(1)}"/><path class="bag-akis" style="--g:${(i * .43).toFixed(2)}s" d="M${C} ${C} L${x.toFixed(1)} ${y.toFixed(1)}"/>`;
-  const d = document.createElement('div');
-  d.className = 'dugum';
-  d.style.left = (x / 5) + '%'; d.style.top = (y / 5) + '%';
-  d.innerHTML = `<i><svg viewBox="0 0 24 24">${IK[ik]}</svg></i><b>${ad}</b>`;
-  yor.appendChild(d);
-});
-svg.innerHTML = s;
-const dugumler = $$('.dugum', yor);
-let di = 0;
-if (!az) setInterval(() => { dugumler.forEach((d, j) => d.classList.toggle('aktif', j === di)); di = (di + 1) % dugumler.length; }, 1600);
+/* ---- ekosistem -> kursiyerin beceri haritası ---- */
+// Örnek kursiyer verisi (AI-LA beceri haritası mantığı: alan = alt becerilerin ortalaması).
+// eksik = hatalı soruların konu eksiği payı (%), kalanı dikkat hatası.
+const ALANLAR = [
+  { ad: 'Matematik', alt: [['Sayılar', 68], ['Cebir', 48], ['Geometri', 64]], eksik: 64, oneri: 'Üslü ifadeler için 2 konu anlatımı ve 1 birebir seans planlandı.' },
+  { ad: 'Türkçe', alt: [['Okuduğunu anlama', 86], ['Sözcük', 80], ['Paragraf', 76]], eksik: 35, oneri: 'Paragraf sorularına süreli tekrar eklendi.' },
+  { ad: 'Fen', alt: [['Kavram', 70], ['Deney yorumu', 58], ['Problem', 66]], eksik: 58, oneri: 'Deney yorumu için görselli konu tekrarı atandı.' },
+  { ad: 'İngilizce', alt: [['Kelime', 78], ['Okuma', 72], ['Dinleme', 64]], eksik: 47, oneri: 'Haftada 3 kısa dinleme görevi plana girdi.' },
+  { ad: 'Okuma hızı', alt: [['Hız', 76], ['Anlama', 88], ['Odak', 74]], eksik: 28, oneri: 'Hızlıokuma Platformunda göz egzersizi serisi başladı.' },
+  { ad: 'Çalışma düzeni', alt: [['Düzenlilik', 88], ['Görev', 92], ['Odak süresi', 70]], eksik: 22, oneri: 'Akşam çalışması 25 dakikalık bloklara bölündü.' },
+];
+const ESKI = [52, 74, 58, 64, 66, 72]; // 4 hafta önce
+const KAYNAKLAR = [
+  { id: 'icerik', ad: 'İçerik Platformu', img: 'n_icerik' },
+  { id: 'hizli', ad: 'Hızlıokuma Platformu', img: 'n_hizliokuma' },
+  { id: 'seans', ad: 'Birebir seans', img: 'r_ogretmen' },
+  { id: 'plan', ad: 'Günlük plan', img: 'r_ogrenci' },
+];
+// [kaynak, alan, alt beceri, artış, etiket]
+const BESLEME = [
+  ['icerik', 0, 1, 3, 'Üslü ifadeler konu anlatımı tamamlandı'],
+  ['hizli', 4, 0, 2, 'Göz egzersizi serisi: 3. gün'],
+  ['seans', 0, 1, 4, 'Birebir seans: cebir tekrarı'],
+  ['plan', 5, 2, 2, '25 dakikalık odak bloğu bitti'],
+  ['icerik', 2, 1, 3, 'Deney yorumu videosu izlendi'],
+  ['hizli', 1, 2, 2, 'Süreli paragraf okuması'],
+  ['plan', 3, 2, 2, 'Dinleme görevi tamamlandı'],
+  ['icerik', 3, 0, 1, 'Kelime kartları tekrarı'],
+];
+const BAZ = ALANLAR.map(a => a.alt.map(x => x[1]));
+const ort = a => Math.round(a.alt.reduce((t, x) => t + x[1], 0) / a.alt.length);
+
+const besle = $('#besle'), kaynakUl = $('#kaynaklar'), radar = $('#radar'), detay = $('#alanDetay');
+const cizgi = $('#besleCizgi'), cekAi = $('#cekirdekAi');
+kaynakUl.innerHTML = KAYNAKLAR.map(k => `<li><button type="button" class="kaynak" data-id="${k.id}"><img src="img/${k.img}.webp" alt="">${k.ad}</button></li>`).join('');
+
+// Radar: 6 eksen, yarıçap 100 = puan 100
+const RR = 100, aci = i => -Math.PI / 2 + i * Math.PI / 3;
+const nokta = (i, v) => [Math.cos(aci(i)) * RR * v / 100, Math.sin(aci(i)) * RR * v / 100];
+const poly = vals => vals.map((v, i) => nokta(i, v).map(n => n.toFixed(1)).join(',')).join(' ');
+let seciliAlan = 0, elleSecim = 0;
+function radarCiz() {
+  let g = '';
+  [25, 50, 75, 100].forEach(v => { g += `<polygon class="izgara" points="${poly(Array(6).fill(v))}"/>`; });
+  ALANLAR.forEach((a, i) => { const [x, y] = nokta(i, 100); g += `<line class="eksen" x1="0" y1="0" x2="${x}" y2="${y}"/>`; });
+  g += `<polygon class="eski" points="${poly(ESKI)}"/><polygon class="simdi" id="simdi" points="${poly(ALANLAR.map(ort))}"/>`;
+  ALANLAR.forEach((a, i) => {
+    const [x, y] = nokta(i, ort(a));
+    g += `<circle class="nokta" id="nk${i}" cx="${x}" cy="${y}" r="4.5"/>`;
+  });
+  ALANLAR.forEach((a, i) => {
+    const [x, y] = nokta(i, 126), anc = Math.abs(x) < 5 ? 'middle' : x > 0 ? 'start' : 'end';
+    g += `<g class="etiket-g" data-i="${i}" tabindex="0" role="button" aria-label="${a.ad}"><text x="${x}" y="${y - 2}" text-anchor="${anc}">${a.ad}</text><text class="puan" id="pu${i}" x="${x}" y="${y + 14}" text-anchor="${anc}">${ort(a)}</text></g>`;
+  });
+  radar.innerHTML = g;
+  $$('.etiket-g', radar).forEach(el => {
+    const sec = () => { elleSecim = Date.now(); alanSec(+el.dataset.i); };
+    el.addEventListener('click', sec);
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sec(); } });
+  });
+}
+function radarGuncelle() {
+  $('#simdi', radar).setAttribute('points', poly(ALANLAR.map(ort)));
+  ALANLAR.forEach((a, i) => {
+    const [x, y] = nokta(i, ort(a));
+    const c = $('#nk' + i, radar); c.setAttribute('cx', x); c.setAttribute('cy', y);
+    $('#pu' + i, radar).textContent = ort(a);
+  });
+}
+function alanSec(i) {
+  seciliAlan = i;
+  const a = ALANLAR[i], min = Math.min(...a.alt.map(x => x[1]));
+  $$('.etiket-g', radar).forEach(el => el.classList.toggle('secili', +el.dataset.i === i));
+  detay.innerHTML = `<h3>${a.ad}<b>${ort(a)}</b></h3>` +
+    a.alt.map(([ad, v]) => `<div class="alt-beceri${v === min ? ' zayif' : ''}"><span>${ad}</span><em>${v}</em><i style="--v:${v}%"></i></div>`).join('') +
+    `<div class="ayrim"><div class="ayrim-cubuk"><span style="width:${a.eksik}%"></span><span style="width:${100 - a.eksik}%"></span></div>` +
+    `<div class="ayrim-etiket"><span>Konu eksiği <b>%${a.eksik}</b></span><span>Dikkat hatası <b>%${100 - a.eksik}</b></span></div></div>` +
+    `<p class="oneri">${a.oneri}</p>`;
+}
+radarCiz(); alanSec(0);
+
+// Akış çizgileri: her kaynaktan AI-LA'ya, AI-LA'dan haritaya
+let hatlar = {};
+function hatCiz() {
+  if (innerWidth <= 1100) return;
+  const r0 = besle.getBoundingClientRect();
+  const rel = el => { const r = el.getBoundingClientRect(); return { l: r.left - r0.left, r: r.right - r0.left, t: r.top - r0.top, b: r.bottom - r0.top, cy: (r.top + r.bottom) / 2 - r0.top, cx: (r.left + r.right) / 2 - r0.left }; };
+  const c = rel($('img', cekAi)), h = rel($('#harita'));
+  let s = '';
+  $$('.kaynak', kaynakUl).forEach(b => {
+    const k = rel(b), mx = (k.r + c.l) / 2;
+    s += `<path class="hat" id="hat-${b.dataset.id}" d="M${k.r} ${k.cy} C ${mx} ${k.cy}, ${mx} ${c.cy}, ${c.l + 8} ${c.cy}"/>`;
+  });
+  s += `<path class="hat" id="hat-cikis" d="M${c.r - 8} ${c.cy} L ${h.l} ${c.cy}"/>`;
+  cizgi.setAttribute('viewBox', `0 0 ${r0.width} ${r0.height}`);
+  cizgi.innerHTML = s;
+  hatlar = {}; $$('.hat', cizgi).forEach(p => { hatlar[p.id.slice(4)] = p; });
+}
+function zerreGonder(yol, sure) {
+  return new Promise(son => {
+    if (!yol || az) return setTimeout(son, az ? 0 : sure);
+    const z = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    z.setAttribute('r', 5); z.setAttribute('class', 'zerre'); cizgi.appendChild(z);
+    const L = yol.getTotalLength(), t0 = performance.now();
+    yol.classList.add('aktif');
+    const ad = t => {
+      const p = Math.min(1, (t - t0) / sure), q = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      const pt = yol.getPointAtLength(q * L); z.setAttribute('cx', pt.x); z.setAttribute('cy', pt.y);
+      if (p < 1) requestAnimationFrame(ad); else { z.remove(); yol.classList.remove('aktif'); son(); }
+    };
+    requestAnimationFrame(ad);
+  });
+}
+let bi = 0, besleZaman = null, besleDongu = 0;
+async function beslemeAdim() {
+  const [kid, ai, si, art, etiket] = BESLEME[bi];
+  bi = (bi + 1) % BESLEME.length;
+  if (bi === 0 && ++besleDongu % 2 === 0) { ALANLAR.forEach((a, i) => a.alt.forEach((x, j) => { x[1] = BAZ[i][j]; })); radarGuncelle(); }
+  const btn = $(`.kaynak[data-id="${kid}"]`, kaynakUl);
+  $$('.kaynak', kaynakUl).forEach(b => b.classList.toggle('aktif', b === btn));
+  await zerreGonder(hatlar[kid], 900);
+  cekAi.classList.remove('nabiz'); void cekAi.offsetWidth; cekAi.classList.add('nabiz');
+  await zerreGonder(hatlar.cikis, 600);
+  const a = ALANLAR[ai]; a.alt[si][1] = Math.min(96, a.alt[si][1] + art);
+  radarGuncelle();
+  if (Date.now() - elleSecim > 8000 || seciliAlan === ai) alanSec(ai);
+  const [x, y] = nokta(ai, ort(a));
+  const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  t.setAttribute('class', 'artis'); t.setAttribute('x', x + 8); t.setAttribute('y', y - 8); t.textContent = `+${art}`;
+  radar.appendChild(t); setTimeout(() => t.remove(), 1500);
+  const m = $('#sonOlayMetin'); m.replaceWith(Object.assign(document.createElement('span'), { id: 'sonOlayMetin', textContent: `${KAYNAKLAR.find(k => k.id === kid).ad} → ${a.ad}: ${etiket}` }));
+  setTimeout(() => btn.classList.remove('aktif'), 900);
+}
+$$('.kaynak', kaynakUl).forEach(b => b.addEventListener('click', () => {
+  const i = BESLEME.findIndex(e => e[0] === b.dataset.id); if (i >= 0) { bi = i; beslemeAdim(); }
+}));
+const besleBasla = () => { if (!besleZaman) { hatCiz(); beslemeAdim(); besleZaman = setInterval(beslemeAdim, 3400); } };
+const besleDur = () => { clearInterval(besleZaman); besleZaman = null; };
+new IntersectionObserver(([e]) => (e.isIntersecting && !document.hidden ? besleBasla() : besleDur()), { threshold: .25 }).observe(besle);
+addEventListener('resize', hatCiz);
+addEventListener('load', hatCiz);
 
 /* ---- paneller ---- */
 const sekmeler = $('#sekmeler'), panelAlan = $('#panelAlan');
