@@ -150,7 +150,7 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 @keyframes cubuk{to{height:var(--h)}}
 
 /* canlı şerit: tek satır, olaylar sırayla akar */
-.canli{position:absolute;z-index:3;left:var(--kenar);bottom:28px;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 2*var(--kenar));
+.canli{position:absolute;z-index:3;left:var(--kenar);bottom:clamp(44px,7svh,72px);display:flex;align-items:center;gap:10px;max-width:calc(100vw - 2*var(--kenar));
   background:#072a23e6;backdrop-filter:blur(12px);color:#e8f1ed;border-radius:999px;padding:10px 18px 10px 14px;box-shadow:var(--g-l);font-size:14px;white-space:nowrap}
 .canli>b{color:var(--altin-y);font:800 14px var(--baslik);letter-spacing:.02em}
 .led{flex:none;width:9px;height:9px;border-radius:50%;background:var(--nane);box-shadow:0 0 0 0 #21a98c;animation:led 1.6s infinite}
