@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KURSLA.ai | Yapay Zekâ Destekli Bireysel Öğrenme Merkezi</title>
+<meta name="description" content="KURSLA.ai, mevcut kurs merkezlerine yapay zekâ desteği ve AI destekli bireysel mentörlük sağlayan sistem. Marka, AI-LA altyapısı, eğitim modeli ve operasyon tek yapıda.">
+<meta property="og:title" content="KURSLA.ai | Kurs merkezinizi yapay zekâ ile yeniden kurun">
+<meta property="og:description" content="Marka, AI-LA teknolojisi ve eğitim modeli tek yapıda. Yönetici, öğretmen, öğrenci ve veli aynı sistemi kendi ekranından izler.">
+<meta property="og:image" content="img/og.jpg">
+<meta name="theme-color" content="#10574a">
+<link rel="icon" href="img/ikon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
+<!-- Kursla v1 (15.11.2026). İçerik canlı kursla.ai'den; düzen AI-LA landing'inden; hero fikri Okumino'nun
+     "okuma odası"ndan: tek bir Codex sahnesi (kesitli kurs binası), katlar tıklanabilir, AI-LA çekirdeği canlı. -->
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="marka" href="#ust" aria-label="KURSLA.ai ana sayfa"><img src="img/kursla_logo.webp" alt="KURSLA.ai" width="677" height="368"></a>
+  <nav class="links" aria-label="Sayfa">
+    <a href="#model">Modelimiz</a>
+    <a href="#nasil">Nasıl Çalışır?</a>
+    <a href="#ekosistem">AI-LA</a>
+    <a href="#franchise">Franchise</a>
+    <a href="#uygulama">Uygulama</a>
+  </nav>
+  <button class="mod" id="mod" type="button" aria-label="Akşam etüdüne geç" aria-pressed="false">
+    <svg class="gun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+    <svg class="ay" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+  </button>
+  <a class="btn btn-ghost btn-sm giris" href="https://login.kursla.ai" id="giris">Giriş Yap</a>
+  <a class="btn btn-sm" href="#basvuru">Başvuru Yap</a>
+  <button class="menu" id="menu" type="button" aria-label="Menüyü aç" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<main>
+<!-- 1. HERO: kesitli kurs binası -->
+<section class="hero" id="ust" aria-labelledby="heroBaslik">
+  <div class="sahne" id="sahne">
+    <div class="bina" id="bina">
+      <img class="gunduz" src="img/hero_gunduz.webp" alt="" fetchpriority="high">
+      <img class="aksam" src="img/hero_aksam.webp" alt="" loading="lazy">
+      <div class="cekirdek" id="cekirdek" aria-hidden="true"><i class="akis"></i><i class="nabiz" id="nabiz"></i></div>
+      <div class="katlar" id="katlar" role="group" aria-label="Kurs merkezi katları. Bir kata tıklayarak o paydaşın ekranını görün."></div>
+    </div>
+  </div>
+
+  <div class="hero-sol">
+    <div class="baslik" id="baslik">
+      <p class="ust-etiket"><span class="nokta"></span>AI-LA altyapısıyla bireysel öğrenme</p>
+      <h1 id="heroBaslik">Kurs merkezinizi <span class="y">yapay zekâ</span> ile yeniden kurun.</h1>
+      <div class="cta-satir">
+        <a class="btn btn-buyuk" href="#basvuru">Başvuru Yap <span aria-hidden="true">→</span></a>
+        <p class="ipucu"><span class="parmak" aria-hidden="true"></span>Bir kata dokunun</p>
+      </div>
+    </div>
+
+    <aside class="kat-kart" id="katKart" aria-live="polite" hidden>
+      <button class="kapat" id="kapat" type="button" aria-label="Kartı kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <p class="kat-no" id="katNo">2. kat</p>
+      <h2 id="katBaslik">Öğrenci ekranı</h2>
+      <p class="kat-metin" id="katMetin"></p>
+      <div class="mock" id="katMock"></div>
+      <div class="kat-gezin">
+        <button type="button" class="kucuk-btn" id="katOnce" aria-label="Önceki kat">↓</button>
+        <button type="button" class="kucuk-btn" id="katSonra" aria-label="Sonraki kat">↑</button>
+        <a class="btn btn-sm" id="katGit" href="#paneller">Paneli incele <span aria-hidden="true">→</span></a>
+      </div>
+    </aside>
+  </div>
+
+  <div class="canli" id="canli" aria-live="off">
+    <span class="led"></span><b>AI-LA</b><span class="canli-sayi"><b id="takip">142</b> öğrenci takipte</span>
+    <ul class="akis-liste" id="akisListe"></ul>
+  </div>
+</section>
+
+<!-- 2. SAYILAR -->
+<section class="sayilar" aria-label="Kısaca KURSLA.ai">
+  <div class="sayi"><b data-say="8" data-son=" hafta">0</b><span>Ortalama dönüşüm süresi</span></div>
+  <div class="sayi"><b data-say="3" data-on="x">0</b><span>Öğretmen başına birebir takip kapasitesi</span></div>
+  <div class="sayi"><b>0 dk</b><span>Manuel ödev hazırlama süresi</span></div>
+  <div class="sayi"><b data-say="4" data-son=" panel">0</b><span>Yönetici · öğretmen · öğrenci · veli</span></div>
+</section>
+
+<!-- 3. MODEL -->
+<section class="bolum" id="model" aria-labelledby="modelBaslik">
+  <div class="bolum-ust">
+    <p class="ust-etiket">Modelimiz</p>
+    <h2 id="modelBaslik">Üç bileşen, tek <span class="y">dönüşüm yapısı</span></h2>
+    <p class="giris-metin">Marka, teknoloji ve eğitim modeli ayrı ürünler değil; merkezinizin tamamını çalıştıran tek sistemdir.</p>
+  </div>
+  <div class="uclu">
+    <article class="bilesen gor" style="--d:0">
+      <div class="bilesen-gorsel"><img src="img/p_marka.webp" alt="" loading="lazy"></div>
+      <span class="no">01</span>
+      <h3>Marka</h3>
+      <p>Kurumsal kimlik, konumlandırma ve veli iletişimi standartlarıyla bölgenizde tanınan bir kurum.</p>
+    </article>
+    <article class="bilesen gor" style="--d:1">
+      <div class="bilesen-gorsel"><img src="img/p_teknoloji.webp" alt="" loading="lazy"></div>
+      <span class="no">02</span>
+      <h3>AI-LA teknolojisi</h3>
+      <p>Öğrenciyi tanıyan, planını kuran ve öğretmene aksiyon öneren yapay zekâ altyapısı.</p>
+    </article>
+    <article class="bilesen gor" style="--d:2">
+      <div class="bilesen-gorsel"><img src="img/p_model.webp" alt="" loading="lazy"></div>
+      <span class="no">03</span>
+      <h3>Eğitim ve operasyon modeli</h3>
+      <p>Bireysel öğrenme müfredatı, öğretmen rolleri ve günlük işleyişin tanımlı olduğu işletim düzeni.</p>
+    </article>
+  </div>
+  <ul class="ozellik-serit">
+    <li><b>Bireysel Öğrenme</b><span>Her öğrenciye özel plan ve içerik</span></li>
+    <li><b>Daha Yüksek Verim</b><span>Öğretmenin yükünü azaltır, merkezinizi büyütür</span></li>
+    <li><b>Güçlü Marka</b><span>KURSLA.ai markasıyla güven ve fark yaratın</span></li>
+  </ul>
+</section>
+
+<!-- 4. NASIL DÖNÜŞÜR -->
+<section class="bolum bolum-krem" id="nasil" aria-labelledby="nasilBaslik">
+  <div class="bolum-ust">
+    <p class="ust-etiket">Nasıl çalışır?</p>
+    <h2 id="nasilBaslik">Kurs merkeziniz <span class="y">nasıl dönüşür?</span></h2>
+    <p class="giris-metin">Ortalama sekiz haftada tamamlanan, tanımlı ve baştan sona destekli bir geçiş.</p>
+  </div>
+  <ol class="donusum" id="donusum">
+    <li class="gor" style="--d:0"><span class="adim">01</span><h3>Merkez analizi</h3><p>Kapasite, kadro ve bölge potansiyeli birlikte değerlendirilir.</p></li>
+    <li class="gor" style="--d:1"><span class="adim">02</span><h3>Teknoloji ve eğitim kurulumu</h3><p>AI-LA altyapısı, içerik erişimi ve bireysel çalışma düzeni kurulur.</p></li>
+    <li class="gor" style="--d:2"><span class="adim">03</span><h3>Ekip eğitimi</h3><p>Yönetici ve öğretmenler yeni modelde uygulamalı olarak eğitilir.</p></li>
+    <li class="gor" style="--d:3"><span class="adim">04</span><h3>Sistem devrede</h3><p>Veli tanıtımı ve sürekli operasyon desteğiyle işleyiş devam eder.</p></li>
+  </ol>
+</section>
+
+<!-- 5. ÖĞRENCİ YOLCULUĞU -->
+<section class="bolum yolculuk" id="yolculuk" aria-labelledby="yolBaslik">
+  <div class="bolum-ust">
+    <p class="ust-etiket">Öğrenci tarafı</p>
+    <h2 id="yolBaslik">Bir öğrencinin <span class="y">KURSLA.ai yolculuğu</span></h2>
+  </div>
+  <div class="patika" id="patika">
+    <svg class="yol-svg" viewBox="0 0 1200 260" preserveAspectRatio="none" aria-hidden="true">
+      <path id="yolIz" d="M30 190 C 170 190, 190 70, 330 70 S 500 190, 630 190 S 790 70, 920 70 S 1090 160, 1170 150" />
+      <path id="yolDolu" d="M30 190 C 170 190, 190 70, 330 70 S 500 190, 630 190 S 790 70, 920 70 S 1090 160, 1170 150" />
+    </svg>
+    <div class="yolcu" id="yolcu" aria-hidden="true"><span>A</span></div>
+    <ol class="duraklar" id="duraklar">
+      <li data-t="0.02"><b>Analiz</b><span>Seviye ve eksikler ilk haftada net biçimde ortaya çıkar.</span></li>
+      <li data-t="0.26"><b>Kişisel plan</b><span>Öğrenciye özel haftalık çalışma planı oluşturulur.</span></li>
+      <li data-t="0.5"><b>İçerik ataması</b><span>Doğru konu, doğru zamanda ve doğru platformdan gelir.</span></li>
+      <li data-t="0.74"><b>Öğretmen takibi</b><span>Birebir seanslarla öğretmen rehberliği devam eder.</span></li>
+      <li data-t="0.98"><b>Veli raporu</b><span>Veli, sade ve anlaşılır bir gelişim özeti alır.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 6. AI-LA ORKESTRASYON -->
+<section class="bolum bolum-koyu" id="ekosistem" aria-labelledby="ekoBaslik">
+  <div class="eko">
+    <div class="eko-metin">
+      <p class="ust-etiket">AI-LA ekosistemi</p>
+      <h2 id="ekoBaslik">AI-LA, çevresinde <span class="y">tüm paydaşlar</span></h2>
+      <p class="alinti">AI-LA tek bir model değil; içerik platformlarını, öğretmeni ve veliyi aynı öğrenci planı etrafında eş zamanlı yöneten bir orkestrasyon katmanıdır.</p>
+      <ul class="eko-liste">
+        <li><b>Tek içerik akışı</b><span>İçerik Platformu, Kodlama Platformu ve Hızlıokuma Platformu içerikleri öğrenciye tek plan üzerinden ulaşır.</span></li>
+        <li><b>Öğretmenin yanında</b><span>Yapay zekâ hazırlığı üstlenir; öğretmen rehberliğe ve birebir takibe odaklanır.</span></li>
+        <li><b>Şeffaf raporlama</b><span>Yönetici, öğretmen ve veli aynı gerçeği farklı sadelikte görür.</span></li>
+      </ul>
+    </div>
+    <div class="yorunge" id="yorunge" aria-label="AI-LA orkestrasyon şeması">
+      <svg class="yorunge-cizgi" viewBox="0 0 500 500" aria-hidden="true"></svg>
+      <div class="merkez"><small>ORKESTRASYON</small><b>AI-LA</b><span>Öğrenci planı</span></div>
+    </div>
+  </div>
+  <div class="eko-alt">
+    <div class="gor" style="--d:0"><b>Eksik ve dikkat haritası</b><p>Çözülen her soru, konu eksiği mi yoksa dikkat hatası mı olduğuna göre ayrıştırılır.</p></div>
+    <div class="gor" style="--d:1"><b>Kendini güncelleyen plan</b><p>Öğrencinin performansı değiştikçe haftalık plan otomatik yeniden kurulur.</p></div>
+    <div class="gor" style="--d:2"><b>Aksiyona dönük çıktı</b><p>Öğretmene öneri, veliye sade özet, yöneticiye karar verilebilir gösterge üretir.</p></div>
+  </div>
+</section>
+
+<!-- 7. PANELLER -->
+<section class="bolum" id="paneller" aria-labelledby="panelBaslik">
+  <div class="bolum-ust">
+    <p class="ust-etiket">Paneller</p>
+    <h2 id="panelBaslik">Her paydaş <span class="y">kendi ekranını</span> görür</h2>
+    <p class="giris-metin">Tek altyapı, dört farklı sadelik seviyesi.</p>
+  </div>
+  <div class="sekmeler" role="tablist" id="sekmeler" aria-label="Paydaşlar"></div>
+  <div class="panel-alan" id="panelAlan"></div>
+</section>
+
+<!-- 8. FRANCHISE -->
+<section class="bolum bolum-krem" id="franchise" aria-labelledby="frBaslik">
+  <div class="bolum-ust">
+    <p class="ust-etiket">Franchise</p>
+    <h2 id="frBaslik">Sisteme <span class="y">iki şekilde</span> dahil olabilirsiniz</h2>
+    <p class="giris-metin">Çalışan bir kurs merkeziniz varsa sisteme taşıyın; yeni kuruyorsanız en baştan kurgulayın.</p>
+  </div>
+  <div class="ikili">
+    <article class="yol-kart one gor" style="--d:0">
+      <span class="rozet">En çok tercih edilen</span>
+      <img src="img/y_mevcut.webp" alt="" loading="lazy">
+      <div><h3>Mevcut merkezinizi sisteme taşıyın</h3>
+      <p>Kurulu düzeninizi ve kadronuzu koruyarak marka, yapay zekâ altyapısı ve mentörlük modelini devreye alın.</p>
+      <a class="btn" href="#basvuru" data-tur="donusum">Mevcut merkezim için başvur <span aria-hidden="true">→</span></a></div>
+    </article>
+    <article class="yol-kart gor" style="--d:1">
+      <img src="img/y_yeni.webp" alt="" loading="lazy">
+      <div><h3>Yeni kuracağınız merkeze kurgulayın</h3>
+      <p>Eğitim sektörüne yeni giriyorsanız, sistemi ve eğitim modelini ilk günden doğru kurmanız için yanınızdayız.</p>
+      <a class="btn btn-ghost" href="#basvuru" data-tur="yeni">Yeni merkez için başvur <span aria-hidden="true">→</span></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- 9. UYGULAMA -->
+<section class="bolum" id="uygulama" aria-labelledby="uyBaslik">
+  <div class="uygulama">
+    <div>
+      <p class="ust-etiket">Uygulama modeli</p>
+      <h2 id="uyBaslik">Merkezinize eklenen <span class="y">yapay zekâ katmanı</span></h2>
+      <ul class="uy-liste">
+        <li class="gor" style="--d:0"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.2 9.1 4.5 4.5 0 0 0 7 18Z"/></svg></span><div><b>Bulut tabanlı altyapı</b><p>Ek donanım veya tadilat gerekmez; sistem mevcut düzeninizin üzerine kurulur.</p></div></li>
+        <li class="gor" style="--d:1"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.8-3.2 3-5 5.5-5s4.7 1.8 5.5 5"/><path d="m15.5 9.5 2 2 3.5-4"/></svg></span><div><b>AI destekli bireysel mentörlük</b><p>Her öğrencinin planını yapay zekâ kurar, öğretmen mentör olarak takip eder.</p></div></li>
+        <li class="gor" style="--d:2"><span class="ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="12" rx="2.5"/><path d="M8 20h8M12 16.5V20M7.5 12.5l3-3 2.5 2 3.5-4"/></svg></span><div><b>Ortak panel ve raporlama</b><p>Yönetici, öğretmen, öğrenci ve veli aynı sistemi kendi ekranından izler.</p></div></li>
+      </ul>
+      <p class="not">KURSLA.ai fiziksel bir kurs merkezi değildir. Kendi merkezinizde, kendi kadronuzla çalışan; öğrenciyi bireysel takip eden bir sistem katmanıdır.</p>
+    </div>
+    <figure class="foto gor">
+      <img src="img/anasayfa.webp" alt="KURSLA.ai sistemini kullanan bir kurs merkezinde bireysel çalışma düzeni" loading="lazy">
+      <figcaption>Sistemi kullanan bir kurs merkezi</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 10. SSS -->
+<section class="bolum bolum-krem" id="sss" aria-labelledby="sssBaslik">
+  <div class="bolum-ust">
+    <p class="ust-etiket">SSS</p>
+    <h2 id="sssBaslik">Merak edilenler</h2>
+  </div>
+  <div class="sss" id="sssListe"></div>
+</section>
+
+<!-- 11. BAŞVURU: aynı bina, akşam -->
+<section class="basvuru" id="basvuru" aria-labelledby="basBaslik">
+  <div class="basvuru-zemin" aria-hidden="true"><img src="img/hero_aksam.webp" alt="" loading="lazy"></div>
+  <div class="basvuru-ic">
+    <div class="basvuru-metin">
+      <img class="basvuru-logo" src="img/kursla_logo_beyaz.webp" alt="KURSLA.ai" width="677" height="368">
+      <h2 id="basBaslik">Merkezinizin dönüşümünü birlikte planlayalım.</h2>
+      <p>Kısa bir bilgi bırakın; ekibimiz bölge analiziyle birlikte sizinle iletişime geçsin.</p>
+    </div>
+    <form class="form" id="form" novalidate>
+      <fieldset class="tur">
+        <legend>Başvuru türünü seçin</legend>
+        <label><input type="radio" name="tur" value="donusum" checked><span>Mevcut merkezimi dönüştürmek istiyorum</span></label>
+        <label><input type="radio" name="tur" value="yeni"><span>Yeni kuracağım merkeze kurmak istiyorum</span></label>
+        <label><input type="radio" name="tur" value="kurum"><span>Kurumsal / belediye iş birliği</span></label>
+      </fieldset>
+      <div class="alanlar">
+        <label><span>Ad Soyad</span><input name="ad" type="text" autocomplete="name" required></label>
+        <label><span>Telefon</span><input name="tel" type="tel" autocomplete="tel" placeholder="05XX..." required></label>
+        <label><span>E-posta adresi</span><input name="eposta" type="email" autocomplete="email" required></label>
+        <label><span>Kurum / Kurs merkezi adı</span><input name="kurum" type="text" autocomplete="organization"></label>
+        <label class="genis"><span>Şehir, öğrenci sayısı ve hedefleriniz</span><textarea name="not" rows="3"></textarea></label>
+      </div>
+      <button class="btn btn-altin btn-buyuk" type="submit">Başvuruyu gönder <span aria-hidden="true">→</span></button>
+      <p class="kucuk">Bilgileriniz yalnızca başvuru değerlendirmesi için kullanılır.</p>
+      <p class="tamam" id="tamam" role="status" hidden>Başvurunuz alındı. Ekibimiz 24 saat içinde sizinle iletişime geçecek.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="altbilgi">
+  <div class="alt-izgara">
+    <div class="alt-marka">
+      <img src="img/kursla_logo_beyaz.webp" alt="KURSLA.ai" width="677" height="368">
+      <p>Mevcut kurs merkezlerine yapay zekâ desteği ve bireysel mentörlük sağlayan; marka, teknoloji ve eğitim modelini tek yapıda sunan sistem.</p>
+    </div>
+    <div><h4>Platform</h4><a href="https://kursla.ai">kursla.ai</a><a href="https://login.kursla.ai">login.kursla.ai</a><a href="https://ai-la.ai">AI-LA ekosistemi</a></div>
+    <div><h4>Nasıl çalışır?</h4><a href="#franchise">Mevcut merkezler için</a><a href="#franchise">Yeni kurulumlar için</a><a href="#basvuru">Başvuru formu</a><a href="#uygulama">Uygulama modeli</a></div>
+    <div><h4>İletişim</h4><a href="mailto:info@kursla.ai">info@kursla.ai</a><span>Pazartesi–Cuma · 09:00–18:00</span></div>
+  </div>
+  <div class="alt-son">
+    <span>© 2026 KURSLA.ai — Tüm hakları saklıdır.</span>
+    <span class="alt-yasal"><a href="#">Gizlilik Politikası</a><a href="#">KVKK Aydınlatma Metni</a><a href="#">Kullanım Koşulları</a></span>
+    <span>Bir <a href="https://ai-la.ai">AI-LA</a> ekosistem ürünüdür.</span>
+  </div>
+</footer>
+
+<script src="app.js?v=6"></script>
+</body>
+</html>
