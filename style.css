@@ -328,7 +328,9 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 /* uygulama */
 .uygulama{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px);align-items:center;max-width:1220px;margin:0 auto}
 .uy-liste{list-style:none;display:grid;gap:18px;margin:28px 0}
-.uy-liste li{display:flex;gap:16px;align-items:flex-start}
+.uy-liste li{display:flex;gap:18px;align-items:center}
+.ikon3d{flex:none;width:clamp(72px,12.5svh,108px);height:clamp(72px,12.5svh,108px);object-fit:contain;filter:drop-shadow(0 8px 14px #10574a22);transition:transform .5s var(--ease)}
+.uy-liste li:hover .ikon3d{transform:translateY(-4px) rotate(-3deg)}
 .ikon{flex:none;width:50px;height:50px;border-radius:16px;background:var(--yesil-50);display:grid;place-items:center}
 .ikon svg{width:24px;height:24px;fill:none;stroke:var(--yesil);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .uy-liste b{font:700 18px var(--baslik);color:var(--yesil-m)}
