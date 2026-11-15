@@ -90,8 +90,44 @@ KATLAR.forEach((k, i) => {
   katlarEl.appendChild(b);
 });
 
+/* Yönlendiren el: bina uyandıktan sonra Yönetici -> Öğretmen -> Öğrenci -> Veli katlarına sırayla dokunur.
+   İki tur atar; ziyaretçi bir kata dokununca hemen çekilir. Hero'ya geri dönülürse bir kez daha oynar. */
+const el = $('#el');
+let elOynuyor = false, elBitti = false, elTur = 0;
+const bekle = ms => new Promise(r => setTimeout(r, ms));
+const elHedef = k => { const [x1, y1, x2, y2] = k.kutu; return [x1 + (x2 - x1) * .3, y1 + (y2 - y1) * .62]; };
+async function elOynat() {
+  if (az || elOynuyor || elBitti || seciliKat >= 0) return;
+  elOynuyor = true;
+  const [sx, sy] = elHedef(KATLAR[0]);
+  el.style.left = (sx - 6) + '%'; el.style.top = (sy - 10) + '%';
+  await bekle(60); el.classList.add('gorun');
+  for (let tur = 0; tur < 2 && !elBitti; tur++) {
+    for (const k of KATLAR) {
+      if (elBitti) break;
+      const [x, y] = elHedef(k);
+      el.style.left = x + '%'; el.style.top = y + '%';
+      await bekle(950);
+      if (elBitti) break;
+      const b = $(`.kat[data-id="${k.id}"]`);
+      el.classList.add('bas'); b.classList.add('dokun');
+      await bekle(260); el.classList.remove('bas');
+      await bekle(700); b.classList.remove('dokun');
+    }
+    await bekle(500);
+  }
+  el.classList.remove('gorun');
+  $$('.kat.dokun').forEach(b => b.classList.remove('dokun'));
+  elOynuyor = false;
+  if (++elTur >= 2) elBitti = true;
+}
+function elDur() { elBitti = true; el.classList.remove('gorun', 'bas'); $$('.kat.dokun').forEach(b => b.classList.remove('dokun')); }
+setTimeout(elOynat, az ? 0 : 3900);
+new IntersectionObserver(([e]) => { if (e.isIntersecting && elTur === 1) setTimeout(elOynat, 600); }, { threshold: .6 }).observe($('#ust'));
+
 let seciliKat = -1;
 function katAc(i) {
+  elDur();
   seciliKat = i;
   const k = KATLAR[i];
   $$('.kat').forEach((b, j) => b.classList.toggle('secili', j === i));

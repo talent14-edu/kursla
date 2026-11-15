@@ -82,8 +82,23 @@ body.aksam .hero{background:linear-gradient(180deg,#0f4b5d 0%,#13576a 22%,#1c647
 .giris-metin{font-size:clamp(16px,1.25vw,18.5px);color:var(--govde);max-width:54ch}
 .cta-satir{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:34px}
 .ipucu{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--yesil-a)}
-.parmak{width:26px;height:26px;border-radius:50%;background:var(--altin);position:relative;flex:none}
-.parmak::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--altin);animation:dalga 1.8s infinite}
+.parmak{width:30px;height:30px;flex:none;display:grid;place-items:center;animation:parmakTik 1.8s ease-in-out infinite}
+.parmak svg{width:26px;height:26px;fill:#fff;stroke:var(--yesil);stroke-width:1.7;stroke-linejoin:round;filter:drop-shadow(0 3px 5px #10574a33)}
+@keyframes parmakTik{0%,60%,100%{transform:none}70%{transform:translateY(2px) scale(.9)}}
+
+/* yönlendiren el: katlara sırayla dokunur (konumu JS verir, % olarak bina kutusunda) */
+.el{position:absolute;z-index:4;width:54px;height:54px;margin:-8px 0 0 -25px;pointer-events:none;opacity:0;
+  transition:left .9s cubic-bezier(.45,.05,.25,1),top .9s cubic-bezier(.45,.05,.25,1),opacity .4s}
+.el.gorun{opacity:1}
+.el svg{position:relative;width:100%;height:100%;fill:#fff;stroke:var(--yesil-k);stroke-width:1.6;stroke-linejoin:round;
+  filter:drop-shadow(0 6px 10px #072a2340);transform-origin:45% 20%;transition:transform .18s ease}
+.el.bas svg{transform:scale(.86) translateY(2px)}
+.el-dalga{position:absolute;left:17px;top:1px;width:18px;height:18px;border-radius:50%;border:2.5px solid var(--altin);opacity:0}
+.el.bas .el-dalga{animation:elDalga .7s ease-out}
+@keyframes elDalga{from{transform:scale(.4);opacity:1}to{transform:scale(2.6);opacity:0}}
+.kat.dokun::before{box-shadow:inset 0 0 0 3px var(--altin),0 0 40px #f5b62b55;background:#f5b62b14}
+.kat.dokun .pin{transform:translateY(-3px);background:var(--altin)}
+.kat.dokun .pin i{background:var(--yesil-m)}
 @keyframes dalga{from{transform:scale(.6);opacity:1}to{transform:scale(1.5);opacity:0}}
 body.aksam .hero h1{color:#fff}
 body.aksam .hero h1 .y{color:var(--yesil-m)}
