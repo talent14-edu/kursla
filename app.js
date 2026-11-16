@@ -14,16 +14,16 @@ const KATLAR = [
     mock: { t: 'Merkez özeti', m: 'BU HAFTA', s: [['Aktif öğrenci', '142 / 150'], ['Birebir seans', '96 görüşme'], ['AI-LA uyarısı', '3 öğrenci', 1]], c: [52, 64, 58, 72, 80, 76, 92] } },
   { id: 'ogretmen', no: 3, ad: 'Öğretmen', kutu: [39.4, 35.4, 93.4, 51.3],
     baslik: 'Öğretmen paneli', metin: 'Plan hazırlığıyla uğraşmadan, doğrudan öğrenciyle geçirdiğiniz zamana odaklanın.',
-    ozellik: ['Öğrenci bazlı hazır haftalık plan', 'Eksik konu ve öncelik uyarıları', 'Birebir seans ajandası'],
+    ozellik: ['Öğrenci bazlı hazır haftalık plan', 'Eksik konu ve öncelik uyarıları', 'Birebir seans ajandası', 'Veliye otomatik bilgilendirme'],
     mock: { t: 'Günün akışı', m: 'BUGÜN', s: [['Ahmet Y. · 8-A', '15:30 seans'], ['Öncelikli konu', 'Üslü ifadeler'], ['Onay bekleyen plan', '4 öğrenci', 1]] } },
   { id: 'ogrenci', no: 2, ad: 'Öğrenci', kutu: [39.4, 53.2, 93.4, 68.8],
     baslik: 'Öğrenci ekranı', metin: 'Ne çalışacağını düşünmeden, her gün net ve ulaşılabilir görevlerle ilerle.',
     ozellik: ['Günlük üç adımlık çalışma planı', 'Tek girişle tüm içerik platformları', 'Haftalık ilerleme özeti'],
     mock: { t: 'Bugünkü plan', m: '3 GÖREV', s: [['Konu anlatımı', 'Tamamlandı'], ['Odaklanma çalışması', 'Tamamlandı'], ['Deneme testi', 'Bekliyor', 1]] } },
   { id: 'veli', no: 1, ad: 'Veli', kutu: [39.4, 70.8, 93.4, 92.3],
-    baslik: 'Veli raporu', metin: 'Karmaşık grafikler yerine, çocuğunuzun gelişimini anlatan sade bir haftalık özet.',
-    ozellik: ['Haftalık çalışma süresi', 'Akademik gelişim özeti', 'Öğretmen notu ve devam bilgisi'],
-    mock: { t: 'Haftalık özet', m: 'CAN T.', s: [['Bireysel çalışma', '18 saat'], ['Okuma hızı', '+%20'], ['Öğretmen notu', 'Var', 1]], c: [30, 42, 38, 55, 61, 58, 70] } },
+    baslik: 'Veli bilgilendirme', metin: 'Veliye çocuğunun gelişimiyle ilgili sade ve düzenli bilgilendirmeler sunulur.',
+    ozellik: [],
+    mock: { t: 'Bu haftaki bilgilendirme', m: 'CAN T.', s: [['Bireysel çalışma', '18 saat'], ['Gelişen alan', 'Okuma'], ['Öğretmen notu', 'Eklendi', 1]] } },
 ];
 // AI-LA şaftı: [sol, üst, genişlik, yükseklik] %
 const SAFT = [61.6, 7.6, 4.4, 84.9];
@@ -32,7 +32,7 @@ const OLAYLAR = [
   ['Ahmet Y. için eksik konu tespit edildi', 'ogrenci'],
   ['Öğretmene birebir seans önerildi', 'ogretmen'],
   ['Haftalık plan yeniden kuruldu', 'ogrenci'],
-  ['Veli gelişim raporu gönderildi', 'veli'],
+  ['Veliye haftalık bilgilendirme gönderildi', 'veli'],
   ['İçerik Platformu konu anlatımı öğrenciye atandı', 'ogrenci'],
   ['Zeynep K. deneme netini 18 artırdı', 'yonetici'],
   ['Can T. akşam çalışmasını tamamladı', 'ogrenci'],
@@ -135,7 +135,9 @@ function katAc(i) {
   $('#katBaslik').textContent = k.baslik;
   $('#katMetin').textContent = k.metin;
   $('#katMock').innerHTML = mockHTML(k);
-  $('#katGit').onclick = () => sekmeSec(k.id);
+  const git = $('#katGit');
+  if (k.id === 'veli') { git.href = '#yolculuk'; git.firstChild.textContent = 'Öğrenci yolculuğu '; git.onclick = null; }
+  else { git.href = '#paneller'; git.firstChild.textContent = 'Paneli incele '; git.onclick = () => sekmeSec(k.id); }
   baslik.classList.add('gizli');
   kart.hidden = false;
   nabizGonder(k);
@@ -257,37 +259,40 @@ durakYerlestir(); kaydir();
 // Örnek kursiyer verisi (AI-LA beceri haritası mantığı: alan = alt becerilerin ortalaması).
 // eksik = hatalı soruların konu eksiği payı (%), kalanı dikkat hatası.
 const ALANLAR = [
-  { ad: 'Matematik', alt: [['Sayılar', 68], ['Cebir', 48], ['Geometri', 64]], eksik: 64, oneri: 'Üslü ifadeler için 2 konu anlatımı ve 1 birebir seans planlandı.' },
-  { ad: 'Türkçe', alt: [['Okuduğunu anlama', 86], ['Sözcük', 80], ['Paragraf', 76]], eksik: 35, oneri: 'Paragraf sorularına süreli tekrar eklendi.' },
+  { ad: 'Matematik', alt: [['Sayılar', 68], ['Cebir', 48], ['Geometri', 64]], eksik: 64, oneri: 'Bilgin\'de üslü ifadeler için 2 konu anlatımı ve 1 birebir seans planlandı.' },
   { ad: 'Fen', alt: [['Kavram', 70], ['Deney yorumu', 58], ['Problem', 66]], eksik: 58, oneri: 'Deney yorumu için görselli konu tekrarı atandı.' },
-  { ad: 'İngilizce', alt: [['Kelime', 78], ['Okuma', 72], ['Dinleme', 64]], eksik: 47, oneri: 'Haftada 3 kısa dinleme görevi plana girdi.' },
-  { ad: 'Okuma hızı', alt: [['Hız', 76], ['Anlama', 88], ['Odak', 74]], eksik: 28, oneri: 'Hızlıokuma Platformunda göz egzersizi serisi başladı.' },
-  { ad: 'Çalışma düzeni', alt: [['Düzenlilik', 88], ['Görev', 92], ['Odak süresi', 70]], eksik: 22, oneri: 'Akşam çalışması 25 dakikalık bloklara bölündü.' },
+  { ad: 'Türkçe', alt: [['Okuduğunu anlama', 86], ['Sözcük', 80], ['Okuma alışkanlığı', 72]], eksik: 32, oneri: 'Okumino\'da haftada 2 okuma durağı plana eklendi.' },
+  { ad: 'İngilizce', alt: [['Kelime', 78], ['Okuma', 72], ['Dinleme', 62]], eksik: 47, oneri: 'Readmino\'da 3 kısa dinleme görevi planlandı.' },
+  { ad: 'Kodlama', alt: [['Algoritma', 82], ['Hata ayıklama', 68], ['Proje', 88]], eksik: 26, oneri: 'TALENT14 patikasında döngüler adımı açıldı.' },
+  { ad: 'Yapay zekâ', alt: [['İstem yazma', 80], ['Doğrulama', 60], ['Etik', 76]], eksik: 30, oneri: 'AI-GALAXY\'de kaynak doğrulama görevi eklendi.' },
 ];
-const ESKI = [52, 74, 58, 64, 66, 72]; // 4 hafta önce
+const ESKI = [52, 60, 74, 62, 72, 66]; // 4 hafta önce
+// Haritayı besleyen ekosistem markaları (hepsi AI-LA ekosisteminin kendi markaları)
 const KAYNAKLAR = [
-  { id: 'icerik', ad: 'İçerik Platformu', img: 'n_icerik' },
-  { id: 'hizli', ad: 'Hızlıokuma Platformu', img: 'n_hizliokuma' },
-  { id: 'seans', ad: 'Birebir seans', img: 'r_ogretmen' },
-  { id: 'plan', ad: 'Günlük plan', img: 'r_ogrenci' },
+  { id: 'bilgin', ad: 'Bilgin', rol: 'İçerik Platformu', img: 'n_icerik' },
+  { id: 'okumino', ad: 'Okumino', rol: 'Okuma Platformu', img: 'n_hizliokuma' },
+  { id: 'readmino', ad: 'Readmino', rol: 'İngilizce Öğrenme Platformu', img: 'b_ingilizce' },
+  { id: 'talent14', ad: 'TALENT14', rol: 'Kodlama Becerileri Platformu', img: 'b_kodlama' },
+  { id: 'aigalaxy', ad: 'AI-GALAXY', rol: 'Yapay Zekâ Okuryazarlığı Platformu', img: 'b_yz' },
+  { id: 'talentcup', ad: 'TalentCup', rol: 'Yarışma Platformu', img: 'b_yarisma' },
 ];
 // [kaynak, alan, alt beceri, artış, etiket]
 const BESLEME = [
-  ['icerik', 0, 1, 3, 'Üslü ifadeler konu anlatımı tamamlandı'],
-  ['hizli', 4, 0, 2, 'Göz egzersizi serisi: 3. gün'],
-  ['seans', 0, 1, 4, 'Birebir seans: cebir tekrarı'],
-  ['plan', 5, 2, 2, '25 dakikalık odak bloğu bitti'],
-  ['icerik', 2, 1, 3, 'Deney yorumu videosu izlendi'],
-  ['hizli', 1, 2, 2, 'Süreli paragraf okuması'],
-  ['plan', 3, 2, 2, 'Dinleme görevi tamamlandı'],
-  ['icerik', 3, 0, 1, 'Kelime kartları tekrarı'],
+  ['bilgin', 0, 1, 3, 'Üslü ifadeler konu anlatımı tamamlandı'],
+  ['okumino', 2, 2, 2, 'Okuma patikasında 3. durak bitti'],
+  ['talent14', 4, 1, 3, 'Döngüler adımında hata ayıklama'],
+  ['readmino', 3, 2, 2, 'Dinleme görevi tamamlandı'],
+  ['aigalaxy', 5, 1, 3, 'Kaynak doğrulama görevi'],
+  ['bilgin', 1, 1, 3, 'Deney yorumu videosu izlendi'],
+  ['talentcup', 4, 2, 2, 'Yarışma projesi teslim edildi'],
+  ['readmino', 3, 0, 1, 'Kelime kartları tekrarı'],
 ];
 const BAZ = ALANLAR.map(a => a.alt.map(x => x[1]));
 const ort = a => Math.round(a.alt.reduce((t, x) => t + x[1], 0) / a.alt.length);
 
 const besle = $('#besle'), kaynakUl = $('#kaynaklar'), radar = $('#radar'), detay = $('#alanDetay');
 const cizgi = $('#besleCizgi'), cekAi = $('#cekirdekAi');
-kaynakUl.innerHTML = KAYNAKLAR.map(k => `<li><button type="button" class="kaynak" data-id="${k.id}"><img src="img/${k.img}.webp" alt="">${k.ad}</button></li>`).join('');
+kaynakUl.innerHTML = KAYNAKLAR.map(k => `<li><button type="button" class="kaynak" data-id="${k.id}"><img src="img/${k.img}.webp" alt=""><span><b>${k.ad}</b><small>${k.rol}</small></span></button></li>`).join('');
 
 // Radar: 6 eksen, yarıçap 100 = puan 100
 const RR = 100, aci = i => -Math.PI / 2 + i * Math.PI / 3;
@@ -397,7 +402,7 @@ addEventListener('load', hatCiz);
 
 /* ---- paneller ---- */
 const sekmeler = $('#sekmeler'), panelAlan = $('#panelAlan');
-const SIRA = ['yonetici', 'ogretmen', 'ogrenci', 'veli'];
+const SIRA = ['yonetici', 'ogretmen', 'ogrenci'];
 SIRA.forEach(id => {
   const k = KATLAR.find(x => x.id === id);
   const b = document.createElement('button');
@@ -468,5 +473,5 @@ form.addEventListener('submit', async e => {
 const bolumIO = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) $$('.links a').forEach(a => a.classList.toggle('aktif', a.getAttribute('href') === '#' + e.target.id));
 }), { rootMargin: '-45% 0px -50% 0px' });
-['model', 'nasil', 'ekosistem', 'franchise', 'uygulama'].forEach(id => bolumIO.observe($('#' + id)));
+['model', 'nasil', 'ekosistem', 'markaniz', 'uygulama'].forEach(id => bolumIO.observe($('#' + id)));
 })();
