@@ -429,7 +429,7 @@ $('#sssListe').innerHTML = SSS.map(([q, a], i) => `<details><summary>${q}</summa
    Apps Script -> Google E-Tablo "KURSLA.ai Başvuruları" (egitim Drive) + e-posta mada@talent14.com (cc egitim@talent14.com).
    Script: kursla/form/Kod.gs. Web uygulaması yayınlanınca /exec adresini FORM_ENDPOINT'e yaz.
    text/plain gövde: CORS ön isteği çıkmaz, Apps Script'e doğrudan düşer. */
-const FORM_ENDPOINT = '';
+const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycby2_UD9UKuDEmk4nz4O5gmDaWWSAe2j_tIdGr7U5R2TMAVAY6KKvYN29heUicUoxbKP2Q/exec';
 $$('[data-tur]').forEach(a => a.addEventListener('click', () => { const r = $(`input[name=tur][value=${a.dataset.tur}]`); if (r) r.checked = true; }));
 const form = $('#form'), gonder = $('button[type=submit]', form), fhata = $('.form-hata', form);
 const url = new URLSearchParams(location.search);
