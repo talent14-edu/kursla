@@ -270,11 +270,11 @@ const ESKI = [52, 60, 74, 62, 72, 66]; // 4 hafta önce
 // Haritayı besleyen ekosistem markaları (hepsi AI-LA ekosisteminin kendi markaları)
 const KAYNAKLAR = [
   { id: 'bilgin', ad: 'Bilgin', rol: 'İçerik Platformu', img: 'n_icerik' },
-  { id: 'okumino', ad: 'Okumino', rol: 'Okuma Platformu', img: 'n_hizliokuma' },
-  { id: 'readmino', ad: 'Readmino', rol: 'İngilizce Öğrenme Platformu', img: 'b_ingilizce' },
-  { id: 'talent14', ad: 'TALENT14', rol: 'Kodlama Becerileri Platformu', img: 'b_kodlama' },
-  { id: 'aigalaxy', ad: 'AI-GALAXY', rol: 'Yapay Zekâ Okuryazarlığı Platformu', img: 'b_yz' },
-  { id: 'talentcup', ad: 'TalentCup', rol: 'Yarışma Platformu', img: 'b_yarisma' },
+  { id: 'okumino', ad: 'Okumino', rol: 'Okuma Platformu', img: 'n_hizliokuma', logo: 'logo_okumino', lt: 'mino' },
+  { id: 'readmino', ad: 'Readmino', rol: 'İngilizce Öğrenme Platformu', img: 'b_ingilizce', logo: 'logo_readmino', lt: 'mino' },
+  { id: 'talent14', ad: 'TALENT14', rol: 'Kodlama Becerileri Platformu', img: 'b_kodlama', logo: 'logo_talent14' },
+  { id: 'aigalaxy', ad: 'AI-GALAXY', rol: 'Yapay Zekâ Okuryazarlığı Platformu', img: 'b_yz', logo: 'logo_aigalaxy' },
+  { id: 'talentcup', ad: 'TalentCup', rol: 'Yarışma Platformu', img: 'b_yarisma', logo: 'logo_talentcup' },
 ];
 // [kaynak, alan, alt beceri, artış, etiket]
 const BESLEME = [
@@ -292,7 +292,7 @@ const ort = a => Math.round(a.alt.reduce((t, x) => t + x[1], 0) / a.alt.length);
 
 const besle = $('#besle'), kaynakUl = $('#kaynaklar'), radar = $('#radar'), detay = $('#alanDetay');
 const cizgi = $('#besleCizgi'), cekAi = $('#cekirdekAi');
-kaynakUl.innerHTML = KAYNAKLAR.map(k => `<li><button type="button" class="kaynak" data-id="${k.id}"><img src="img/${k.img}.webp" alt=""><span><b>${k.ad}</b><small>${k.rol}</small></span></button></li>`).join('');
+kaynakUl.innerHTML = KAYNAKLAR.map(k => `<li><button type="button" class="kaynak" data-id="${k.id}"><img src="img/${k.img}.webp" alt=""><span>${k.logo ? `<img class="kaynak-logo${k.lt ? ' ' + k.lt : ''}" src="img/${k.logo}.webp" alt="${k.ad}">` : `<b>${k.ad}</b>`}<small>${k.rol}</small></span></button></li>`).join('');
 
 // Radar: 6 eksen, yarıçap 100 = puan 100
 const RR = 100, aci = i => -Math.PI / 2 + i * Math.PI / 3;

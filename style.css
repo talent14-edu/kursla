@@ -251,15 +251,17 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 .kaynak img{width:64px;height:64px;object-fit:contain;flex:none;transition:transform .4s var(--ease)}
 .kaynak span{display:flex;flex-direction:column;line-height:1.2}
 .kaynak b{font:800 15px var(--baslik);color:#fff;letter-spacing:.01em}
+.kaynak img.kaynak-logo{width:auto;height:15px;object-fit:contain;align-self:flex-start;margin:2px 0 3px;transform:none!important}
+.kaynak img.kaynak-logo.mino{height:34px;margin:-2px 0 0 -2px}
 .kaynak small{font-size:12.5px;font-weight:600;color:#a9c1b8;margin-top:2px}
 .kaynak.aktif small{color:#f3e2b0}
 .kaynak:hover{background:#ffffff17}
 .kaynak.aktif{background:#f5b62b24;box-shadow:inset 0 0 0 1.5px #ffc94f99,0 0 30px #f5b62b33;transform:translateX(6px)}
 .kaynak.aktif img{transform:scale(1.08) rotate(-3deg)}
 .cekirdek-ai{grid-row:1;display:grid;justify-items:center;gap:6px;position:relative}
-.cekirdek-ai img{width:112px;height:112px;object-fit:contain;filter:drop-shadow(0 0 28px #f5b62b66);animation:suzul 5s ease-in-out infinite}
-.cekirdek-ai b{font:900 20px var(--baslik);color:var(--altin-y);letter-spacing:.02em}
-.cekirdek-ai.nabiz img{animation:suzul 5s ease-in-out infinite,parla .7s var(--ease)}
+.cekirdek-ai img:first-child{width:112px;height:112px;object-fit:contain;filter:drop-shadow(0 0 28px #f5b62b66);animation:suzul 5s ease-in-out infinite}
+.cekirdek-ai img.aila-logo{width:auto;height:36px;filter:none;animation:none}
+.cekirdek-ai.nabiz img:first-child{animation:suzul 5s ease-in-out infinite,parla .7s var(--ease)}
 @keyframes suzul{50%{transform:translateY(-8px)}}
 @keyframes parla{40%{filter:drop-shadow(0 0 46px #ffc94f)}}
 .harita{grid-row:1;background:#ffffff0d;box-shadow:inset 0 0 0 1px #ffffff1f;border-radius:var(--r-xl);padding:20px 24px}
@@ -471,7 +473,7 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
   .besle-cizgi{display:none}
   .kaynaklar{grid-template-columns:1fr 1fr;grid-row:auto}
   .cekirdek-ai{grid-row:auto}
-  .cekirdek-ai img{width:84px;height:84px}
+  .cekirdek-ai img:first-child{width:84px;height:84px}
   .harita{grid-row:auto}
   .ciktilar{grid-column:auto;grid-row:auto}
   .hero{min-height:auto;display:flex;flex-direction:column}
