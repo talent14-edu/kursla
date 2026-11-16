@@ -241,7 +241,7 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 .bolum-koyu h2{color:#fff}
 .bolum-koyu .y{color:var(--altin-y)}
 .bolum-koyu .ust-etiket{color:#6fe0c2}
-.besle{position:relative;display:grid;grid-template-columns:minmax(230px,290px) 110px minmax(0,1fr);grid-template-rows:auto auto;column-gap:clamp(24px,4vw,64px);row-gap:18px;align-items:center;max-width:1220px;margin:0 auto}
+.besle{position:relative;display:grid;grid-template-columns:minmax(230px,290px) 130px minmax(0,1fr);grid-template-rows:auto auto;column-gap:clamp(24px,4vw,64px);row-gap:18px;align-items:center;max-width:1220px;margin:0 auto}
 .besle-cizgi{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .besle-cizgi .hat{fill:none;stroke:#21a98c80;stroke-width:2;stroke-dasharray:2 8;stroke-linecap:round}
 .besle-cizgi .hat.aktif{stroke:#ffc94fb3;stroke-dasharray:none}
@@ -260,7 +260,8 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 .kaynak.aktif img{transform:scale(1.08) rotate(-3deg)}
 .cekirdek-ai{grid-row:1;display:grid;justify-items:center;gap:6px;position:relative}
 .cekirdek-ai img:first-child{width:112px;height:112px;object-fit:contain;filter:drop-shadow(0 0 28px #f5b62b66);animation:suzul 5s ease-in-out infinite}
-.cekirdek-ai img.aila-logo{width:auto;height:36px;filter:none;animation:none}
+/* AI-LA logosunun koyu zemin sürümü yok (marka-aila): beyaz hap üstünde, oranı korunarak */
+.cekirdek-ai img.aila-logo{width:auto;max-width:none;height:28px;padding:7px 12px;box-sizing:content-box;background:#fff;border-radius:999px;box-shadow:0 6px 18px #0004;filter:none;animation:none}
 .cekirdek-ai.nabiz img:first-child{animation:suzul 5s ease-in-out infinite,parla .7s var(--ease)}
 @keyframes suzul{50%{transform:translateY(-8px)}}
 @keyframes parla{40%{filter:drop-shadow(0 0 46px #ffc94f)}}
