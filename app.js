@@ -269,7 +269,7 @@ const ALANLAR = [
 const ESKI = [52, 60, 74, 62, 72, 66]; // 4 hafta önce
 // Haritayı besleyen ekosistem markaları (hepsi AI-LA ekosisteminin kendi markaları)
 const KAYNAKLAR = [
-  { id: 'bilgin', ad: 'Bilgin', rol: 'İçerik Platformu', img: 'n_icerik' },
+  { id: 'bilgin', ad: 'Bilgin', rol: 'İçerik Platformu', img: 'n_icerik', logo: 'logo_bilgin', lt: 'bilgin' },
   { id: 'okumino', ad: 'Okumino', rol: 'Okuma Platformu', img: 'n_hizliokuma', logo: 'logo_okumino', lt: 'mino' },
   { id: 'readmino', ad: 'Readmino', rol: 'İngilizce Öğrenme Platformu', img: 'b_ingilizce', logo: 'logo_readmino', lt: 'mino' },
   { id: 'talent14', ad: 'TALENT14', rol: 'Kodlama Becerileri Platformu', img: 'b_kodlama', logo: 'logo_talent14' },

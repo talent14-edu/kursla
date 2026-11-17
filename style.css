@@ -253,6 +253,7 @@ body.aksam .hero .ust-etiket,body.aksam .hero .ipucu{color:var(--altin-y)}
 .kaynak b{font:800 15px var(--baslik);color:#fff;letter-spacing:.01em}
 .kaynak img.kaynak-logo{width:auto;height:15px;object-fit:contain;align-self:flex-start;margin:2px 0 3px;transform:none!important}
 .kaynak img.kaynak-logo.mino{height:34px;margin:-2px 0 0 -2px}
+.kaynak img.kaynak-logo.bilgin{height:34px;padding:3px 10px;margin:2px 0 4px -2px;background:#fff;border-radius:999px;box-sizing:content-box}
 .kaynak small{font-size:12.5px;font-weight:600;color:#a9c1b8;margin-top:2px}
 .kaynak.aktif small{color:#f3e2b0}
 .kaynak:hover{background:#ffffff17}
